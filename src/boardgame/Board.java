@@ -30,7 +30,6 @@ public class Board {
 	public void setColumns(int columns) {
 		this.columns = columns;
 	}
-	
 	//Retorna a "piece" pela matriz
 	public Piece piece(int row, int column) {
 		return pieces[row][column];
@@ -39,5 +38,11 @@ public class Board {
 	public Piece piece(Position position) {
 		return pieces[position.getRow()][position.getColumn()];
 	}
+	//Responsavel por colocar a peça em determinado local do tabuleiro
+	public void placePiece(Piece piece, Position position) {
+		pieces[position.getRow()][position.getColumn()] = piece;
+		piece.position = position;
+	}
+	
 	
 }
