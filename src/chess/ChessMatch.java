@@ -1,5 +1,8 @@
 package chess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
@@ -10,8 +13,10 @@ public class ChessMatch {
 	
 	private int turn;
 	private Color currentPlayer;
-	
 	private Board board;
+	
+	private List<Piece> piecesOnTheBoard = new ArrayList<>();
+	private List<Piece> capturedPieces = new ArrayList<>();
 	
 	/* Partindo do fundamento de delegar tarefas as classes, a classe responsavel por saber o tamanho
 	 * de um tabuleiro de xadrez é classe "ChessMatch", já que ela é a classe coração do da partida e 
@@ -68,10 +73,16 @@ public class ChessMatch {
 		return (ChessPiece)capturedPiece;
 	}
 	
+	//Responsavel por fazer o movimento das peças de xadrez
 	private Piece makeMove(Position source, Position target) {
 		Piece p = board.removePiece(source);
 		Piece capturedPiece = board.removePiece(target);
 		board.placePiece(p, target);
+		
+		if(capturedPiece != null) {
+			piecesOnTheBoard.remove(capturedPiece);
+			capturedPieces.add(capturedPiece);
+		}
 		return capturedPiece;
 	}
 	
@@ -105,6 +116,7 @@ public class ChessMatch {
 	//Metodo para instanciar uma peça usando as coordenadas do xadrez, em vez de usar coordenadas da matriz
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
 		board.placePiece(piece, new ChessPosition(column, row).toPosition());
+		piecesOnTheBoard.add(piece);
 	}
 	
 	private void initialSetup() {
