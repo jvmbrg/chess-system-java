@@ -5,9 +5,9 @@ import boardgame.Position;
 import chess.ChessPiece;
 import chess.Color;
 
-public class Quenn extends ChessPiece{
+public class Queen extends ChessPiece{
 
-	public Quenn(Board board, Color color) {
+	public Queen(Board board, Color color) {
 		super(board, color);
 		// TODO Auto-generated constructor stub
 	}
